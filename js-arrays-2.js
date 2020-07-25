@@ -133,3 +133,31 @@ const currentPoint = [5, 5];
 // getTheNearestLocation([], currentPoint); // null
 
 //  console.log(getTheNearestLocation(locations, currentPoint)) // ['Museum', [8, 4]]
+
+// step 51
+const openingSymbols = ['(', '[', '{', '<'];
+const closingSymbols = [')', ']', '}', '>'];
+
+const isBracketStructureBalanced = (expression) => {
+  if(expression.length % 2 !== 0) return false
+
+  const stack = []
+
+  for(const symbol of expression) {
+    if(openingSymbols.indexOf(symbol) > -1) {
+      stack.push(symbol)
+    }
+    else {
+      const symbolOpenBreacket = openingSymbols[closingSymbols.indexOf(symbol)]
+      const lastSymbol = stack[stack.length - 1]
+
+        if(stack.indexOf(symbolOpenBreacket) > -1 && lastSymbol === symbolOpenBreacket) {
+          stack.splice(-1,1)
+        }
+    }
+  }
+
+  return stack.length === 0
+}
+
+console.log(isBracketStructureBalanced('())[]'))
